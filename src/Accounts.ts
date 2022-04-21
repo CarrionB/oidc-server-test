@@ -77,7 +77,8 @@ class Account {
     if (!logins.get(login)) {
       logins.set(login, new Account(login, {}));
     }
-
+    console.log("find by login")
+    console.log("login => ", login)
     return logins.get(login);
   }
 
@@ -85,6 +86,8 @@ class Account {
     // token is a reference to the token used for which a given account is being loaded,
     //   it is undefined in scenarios where account claims are returned from authorization endpoint
     // ctx is the koa request context
+
+    console.log("token => ", token)
     const profile = {
       sub: id, // it is essential to always return a sub claim
 

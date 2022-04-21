@@ -1,15 +1,17 @@
 import 'dotenv/config'
 import express from "express";
-import { Provider } from 'oidc-provider';
+import { Provider, ResponseType } from 'oidc-provider';
 const Account = require('./Accounts');
 const {PORT} = process.env
+const responseTypes: ResponseType[] = ["code id_token", "id_token", "code"]
 const configuration = {
   // ... see /docs for available configuration
   clients: [{
     client_id: 'test_implicit_app',
     client_secret: 'bar',
-    grant_types: ['refresh_token', 'authorization_code', 'client_credentials', 'password'],
-    redirect_uris: ['https://openidconnect.net/callback'],
+    grant_types: ['implicit', 'authorization_code', 'refresh_token'],
+    redirect_uris: ['https://oauth.pstmn.io/v1/callback', 'https://openidconnect.net/callback'],
+    response_types: responseTypes,
     // ... other client properties
   }],
   claims: {
